@@ -1,0 +1,120 @@
+body {
+    background-image: url(../img/background.jpeg);
+    color: #0f2139;
+
+}
+
+
+.color {
+    color: #cfdef2;
+    color: #3574c4;
+    color: #7fa7db;
+    color: #6c84ac;
+    color: #9caccc;
+    color: #0f2139;
+}
+
+.about:not(.paragraph-class) {
+    opacity: 0.8;
+}
+
+.paragraph-class {
+    font-weight: bolder;
+}
+
+.navbar-custom a {
+    font-weight: bolder;
+    color: black;
+}
+
+.navbar-custom a:hover {
+    color: #3574c4;
+    transition: all 0.3s ease;
+}
+
+.register-login {
+    opacity: 0.8;
+
+}
+
+.nav-link {
+    color: black;
+    font-weight: bold;
+    width: 100%;
+
+}
+
+.nav-tabs .nav-item .nav-link.active {
+    background-color: #3574c4;
+}
+
+.nav-tabs .nav-item {
+    width: 50%;
+}
+
+
+.nav-link:hover {
+    color: #3574c4;
+    transition: all 0.3s ease;
+
+}
+
+
+.modal-body,
+.modal-footer {
+    background-color: #cfdef2;
+    border: 15px;
+    padding: 25px;
+
+}
+
+.modal-content {
+    border-radius: 1%;
+    transition: none;
+
+}
+
+
+.btn {
+
+    background-color: #3574c4;
+    color: rgb(207, 222, 242)
+}
+
+.btn:hover {
+    background-color: #7fa7db;
+}
+
+
+.carousel-item img {
+    height: 500px;
+}
+
+.carousel-caption p {
+    color: #3574c4;
+    height: 35%;
+    font-size: 25px;
+    text-shadow: 1px 1px 3px #cfdef2;
+
+}
+
+.carousel-caption h3 {
+    color: #0f2139;
+    text-shadow: 1px 1px 3px #cfdef2;
+
+}
+
+.register-login {
+
+    height: 500px;
+}
+
+.card-body p {
+    background-color: #0f2139;
+    background-image: linear-gradient(to right, #0f2139, #3574c4, #0f2139, #3574c4);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}

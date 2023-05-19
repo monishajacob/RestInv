@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Property</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <!-- Load custom stylesheet -->
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link href="css/property.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="p-3 m-0 border-0 bd-example ">
+
+
+    <!-- Navbar Section -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-custom" style="background-color: white ;">
+        <div class="container-fluid ">
+            <a class="navbar-brand" href="#">
+                <img alt="Logo" class="d-inline-block align-text-top" height="24"
+                    src="https://img.icons8.com/external-others-iconmarket/64/null/external-home-search-others-iconmarket.png"
+                    width="30">
+                RestInv
+            </a>
+            <button aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler" data-bs-target="#navbarTogglerDemo02" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link "
+                            href="http://localhost:8080/api/v1/restinv/market.html"><img alt="Logout" height="24"
+                                src="https://img.icons8.com/ultraviolet/40/null/new-york.png" width="30"><span
+                                style="padding-left: 4px; ">MARKETS</span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav position-absolute top-0 end-0 mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link logout" href="http://localhost:8080/api/v1/restinv/"
+                            onclick="handleLogout()">
+                            <img alt="Logout" height="24" onclick="handleLogout()"
+                                src="https://img.icons8.com/fluency/48/null/exit.png" width="30">
+                            LOGOUT</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end of nav bar -->
+    <!-- body -->
+    <div class="container text-center">
+        <div class="vstack gap-3">
+            <div class="p-2 rounded-3">
+                <div class="text-center">
+                    <button class="btn " data-bs-target="#staticBackdrop" data-bs-toggle="modal"
+                        style="padding: 6px 12px;font-size:larger;" type="button">Create Property
+                    </button>
+                </div>
+
+
+            </div>
+            <div class="p-2 rounded-2">
+                <div class="row card-group row-cols-md-4 g-3" id="property-container">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- end of body -->
+
+    <!-- view property details  -->
+
+    <div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade " data-bs-backdrop="static"
+        data-bs-keyboard="false" id="view-property-modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl ">
+            <div class="modal-content" id="view-property-details">
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- view property details  -->
+
+    <!-- create property modal -->
+
+
+    <div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade" data-bs-backdrop="static"
+        data-bs-keyboard="false" id="staticBackdrop" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Property</h4>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="card mx-auto border-0 str-ltr">
+                        <div class="card-header border-bottom-0 bg-transparent">
+                            <ul class="nav nav-tabs justify-content-center pt-4" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a aria-controls="pills-ltr" aria-selected="true" class="nav-link active"
+                                        data-bs-toggle="pill" data-toggle="pill" href="#pills-ltr" id="pills-ltr-tab"
+                                        role="tab">Create Long Term Rental</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a aria-controls="pills-str" aria-selected="false" class="nav-link"
+                                        data-bs-toggle="pill" data-toggle="pill" href="#pills-str" id="pills-str-tab"
+                                        role="tab">Create Short Term Rental</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body pb-4">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div aria-labelledby="pills-ltr-tab" class="tab-pane fade show active" id="pills-ltr"
+                                    role="tabpanel">
+                                    <form id="ltr-form">
+                                        <div class="row gap-3">
+                                            <div class="col gap-3">
+
+                                                <label class="form-label" style="font-weight: bolder;">Purchase
+                                                    Data</label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Property Type</label>
+                                                        <input class="form-control" disabled id="propertyType"
+                                                            name="property-Type" type="text" value="LTR">
+
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Property Status</label>
+                                                        <select aria-label="Default select example" class="form-select"
+                                                            id="statusName" required>
+                                                            <option selected>Select property status</option>
+                                                            <option value="Active">Active</option>
+                                                            <option value="Coming-Soon">Coming-Soon</option>
+                                                            <option value="Accepting-Backup-Offers">
+                                                                Accepting-Backup-Offers
+                                                            </option>
+                                                            <option value="Under-Contract/Pending">
+                                                                Under-Contract/Pending
+                                                            </option>
+                                                            <option value="Sold">Sold</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <label class="form-label">Property Address</label>
+                                                    <input class="form-control" id="addressLine" name="address" required
+                                                        type="text">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">City</label>
+                                                        <input class="form-control" id="city" name="property-city"
+                                                            required type="text">
+                                                    </div>
+                                                    <div class="col">
+
+
+                                                        <label class="form-label">State</label>
+                                                        <input class="form-control" id="property-state" list="statelist"
+                                                            onchange="resetIfInvalid(this);"
+                                                            placeholder="Enter State..." required>
+                                                        <datalist class="statelist">
+                                                            <option value="Alabama"></option>
+                                                            <option value="Alaska"></option>
+                                                            <option value="Arizona"></option>
+                                                            <option value="Arkansas"></option>
+                                                            <option value="California"></option>
+                                                            <option value="Colorado"></option>
+                                                            <option value="Connecticut"></option>
+                                                            <option value="Delaware"></option>
+                                                            <option value="District of Columbia"></option>
+                                                            <option value="Florida"></option>
+                                                            <option value="Georgia"></option>
+                                                            <option value="Hawaii"></option>
+                                                            <option value="Idaho"></option>
+                                                            <option value="Illinois"></option>
+                                                            <option value="Indiana"></option>
+                                                            <option value="Iowa"></option>
+                                                            <option value="Kansas"></option>
+                                                            <option value="Kentucky"></option>
+                                                            <option value="Louisiana"></option>
+                                                            <option value="Maine"></option>
+                                                            <option value="Maryland"></option>
+                                                            <option value="Massachusetts"></option>
+                                                            <option value="Michigan"></option>
+                                                            <option value="Minnesota"></option>
+                                                            <option value="Mississippi"></option>
+                                                            <option value="Missouri"></option>
+                                                            <option value="Montana"></option>
+                                                            <option value="Nebraska"></option>
+                                                            <option value="Nevada"></option>
+                                                            <option value="New Hampshire"></option>
+                                                            <option value="New Jersey"></option>
+                                                            <option value="New Mexico"></option>
+                                                            <option value="New York"></option>
+                                                            <option value="North Carolina"></option>
+                                                            <option value="North Dakota"></option>
+                                                            <option value="Ohio"></option>
+                                                            <option value="Oklahoma"></option>
+                                                            <option value="Oregon"></option>
+                                                            <option value="Pennsylvania"></option>
+                                                            <option value="Rhode Island"></option>
+                                                            <option value="South Carolina"></option>
+                                                            <option value="South Dakota"></option>
+                                                            <option value="Tennessee"></option>
+                                                            <option value="Texas"></option>
+                                                            <option value="Utah"></option>
+                                                            <option value="Vermont"></option>
+                                                            <option value="Virginia"></option>
+                                                            <option value="Washington"></option>
+                                                            <option value="West Virginia"></option>
+                                                            <option value="Wisconsin"></option>
+                                                            <option value="Wyoming"></option>
+                                                        </datalist>
+
+
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Zipcode</label>
+                                                        <input class="form-control" id="zipcode" name="property-zipcode"
+                                                            type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label" for="purchase-price">Purchase Price
+                                                            ($)</label>
+                                                        <input class="form-control" id="purchasePrice"
+                                                            name="property-purchase-price" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label" for="down-payment">Down Payment
+                                                            (%)</label>
+                                                        <input class="form-control" id="percentDownPayment"
+                                                            name="property-down-payment" required type="text"
+                                                            value="20">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label" for="closing-cost">Closing Cost
+                                                            ($)</label>
+                                                        <input class="form-control" id="closingCosts"
+                                                            name="property-closing-cost" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label"
+                                                            for="repairs-renovation">Repairs/Renovation ($)</label>
+                                                        <input class="form-control" id="repairsRenovationCost"
+                                                            name="property-repairs-renovation" required type="text">
+                                                    </div>
+                                                </div>
+                                                <label class="form-label" style="font-weight: bolder;">Loan
+                                                    Data</label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label" for="percentInterestRate">Interest
+                                                            Rate (%)
+                                                        </label>
+                                                        <input class="form-control" id="percentInterestRate"
+                                                            name="interest-rate" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label" for="yearsFinanced">Years Financed
+                                                        </label>
+                                                        <input class="form-control" id="yearsFinanced"
+                                                            name="years-financed" required type="text" value="30">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label" for="payment-per-year">Payments Per
+                                                            Year</label>
+                                                        <input class="form-control" id="paymentsPerYear"
+                                                            name="payment-per-year" required type="text" value="12">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col gap-3">
+                                                <label class="form-label" style="font-weight: bolder;">Property
+                                                    Data</label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Number of Units</label>
+                                                        <input class="form-control" id="ltrNumberOfUnits"
+                                                            name="property-number-of-units" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Property Tax ($)</label>
+                                                        <input class="form-control" id="propertyTaxesPerYear"
+                                                            name="taxes-per-year" placeholder="Yearly Taxes" required
+                                                            type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Vacancy Rate (%)</label>
+                                                        <input class="form-control" id="ltrPercentVacancyRate"
+                                                            name="vacancy-rate" required type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Insurance/Year ($)</label>
+                                                        <input class="form-control" id="insurancePerYear"
+                                                            name="property-insurance-per-year" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Monthly Gross Rental Income
+                                                            ($)</label>
+                                                        <input class="form-control" id="ltrMonthlyRentalIncome"
+                                                            name="gross-rental-income" required type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label"
+                                                            style="font-weight: bolder; padding-top: 4px;">Property
+                                                            Management Data</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Leasing Cost per Unit ($)</label>
+                                                        <input class="form-control" id="ltrLeasingCostPerUnit"
+                                                            name="leasing-cost" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Maintenance Costs (%)</label>
+                                                        <input class="form-control" id="percentMaintenanceCost"
+                                                            name="maintenence-cost" required type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Property Management Fee (%)</label>
+                                                        <input class="form-control" id="percentPropertyManagementFee"
+                                                            name="property-management-fee" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Monthly Utilities/Other ($)</label>
+                                                        <input class="form-control" id="monthlyUtilities"
+                                                            name="monthly-utilities" required type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Average Occupancy (years)
+                                                        </label>
+                                                        <input class="form-control" id="ltrAverageOccupancyYears"
+                                                            name="average-occupancy" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">HOA per year ($)
+                                                        </label>
+                                                        <input class="form-control" id="hoaPerYear" name="hoa-yearly"
+                                                            required type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label" for="upload-image">Upload
+                                                            Image</label>
+                                                        <input class="form-control" id="property-upload-image"
+                                                            type="file">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row gap-3">
+                                            <div class="col gap-3">
+                                                <label class="form-label" for="property-note">Note</label>
+                                                <textarea class="form-control" id="ltrnote" rows="1"></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="row gap-3 justify-content-center">
+
+                                            <button class="btn " id="submit-button"
+                                                style="padding: 5px;font-size: larger;" type="submit">Create
+                                                LTR
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- </div> -->
+
+                                <div aria-labelledby="pills-str-tab" class="tab-pane fade" id="pills-str"
+                                    role="tabpanel">
+
+                                    <form id="str-form">
+                                        <div class="row gap-3">
+                                            <div class="col gap-3">
+
+                                                <label class="form-label" style="font-weight: bolder;">Purchase
+                                                    Data</label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Property Type</label>
+                                                        <input class="form-control" disabled id="strpropertyType"
+                                                            name="property-Type" type="text" value="STR">
+
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Property Status</label>
+                                                        <select aria-label="Default select example" class="form-select"
+                                                            id="strstatusName" required>
+                                                            <option selected>Select property status</option>
+                                                            <option value="Active">Active</option>
+                                                            <option value="Coming-Soon">Coming-Soon</option>
+                                                            <option value="Accepting-Backup-Offers">
+                                                                Accepting-Backup-Offers
+                                                            </option>
+                                                            <option value="Under-Contract/Pending">
+                                                                Under-Contract/Pending
+                                                            </option>
+                                                            <option value="Sold">Sold</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col">
+                                                    <label class="form-label">Property Address</label>
+                                                    <input class="form-control" id="straddressLine" name="address"
+                                                        required type="text">
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">City</label>
+                                                        <input class="form-control" id="strcity" name="property-city"
+                                                            required type="text">
+                                                    </div>
+
+                                                    <div class="col">
+
+
+                                                        <label class="form-label">State</label>
+                                                        <input class="form-control" id="strproperty-state"
+                                                            list="statelist" onchange="resetIfInvalid(this);"
+                                                            placeholder="Enter State..." required>
+                                                        <datalist class="statelist">
+                                                            <option value="Alabama"></option>
+                                                            <option value="Alaska"></option>
+                                                            <option value="Arizona"></option>
+                                                            <option value="Arkansas"></option>
+                                                            <option value="California"></option>
+                                                            <option value="Colorado"></option>
+                                                            <option value="Connecticut"></option>
+                                                            <option value="Delaware"></option>
+                                                            <option value="District of Columbia"></option>
+                                                            <option value="Florida"></option>
+                                                            <option value="Georgia"></option>
+                                                            <option value="Hawaii"></option>
+                                                            <option value="Idaho"></option>
+                                                            <option value="Illinois"></option>
+                                                            <option value="Indiana"></option>
+                                                            <option value="Iowa"></option>
+                                                            <option value="Kansas"></option>
+                                                            <option value="Kentucky"></option>
+                                                            <option value="Louisiana"></option>
+                                                            <option value="Maine"></option>
+                                                            <option value="Maryland"></option>
+                                                            <option value="Massachusetts"></option>
+                                                            <option value="Michigan"></option>
+                                                            <option value="Minnesota"></option>
+                                                            <option value="Mississippi"></option>
+                                                            <option value="Missouri"></option>
+                                                            <option value="Montana"></option>
+                                                            <option value="Nebraska"></option>
+                                                            <option value="Nevada"></option>
+                                                            <option value="New Hampshire"></option>
+                                                            <option value="New Jersey"></option>
+                                                            <option value="New Mexico"></option>
+                                                            <option value="New York"></option>
+                                                            <option value="North Carolina"></option>
+                                                            <option value="North Dakota"></option>
+                                                            <option value="Ohio"></option>
+                                                            <option value="Oklahoma"></option>
+                                                            <option value="Oregon"></option>
+                                                            <option value="Pennsylvania"></option>
+                                                            <option value="Rhode Island"></option>
+                                                            <option value="South Carolina"></option>
+                                                            <option value="South Dakota"></option>
+                                                            <option value="Tennessee"></option>
+                                                            <option value="Texas"></option>
+                                                            <option value="Utah"></option>
+                                                            <option value="Vermont"></option>
+                                                            <option value="Virginia"></option>
+                                                            <option value="Washington"></option>
+                                                            <option value="West Virginia"></option>
+                                                            <option value="Wisconsin"></option>
+                                                            <option value="Wyoming"></option>
+                                                        </datalist>
+
+
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Zipcode</label>
+                                                        <input class="form-control" id="strzipcode"
+                                                            name="property-zipcode" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label" for="purchase-price">Purchase Price
+                                                            ($)</label>
+                                                        <input class="form-control" id="strpurchasePrice"
+                                                            name="property-purchase-price" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label" for="start-up-cost">Start-up Cost
+                                                            ($)</label>
+                                                        <input class="form-control" id="strStartupCosts"
+                                                            name="start-up-cost" placeholder="Furniture etc.." required
+                                                            type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label" for="down-payment">Down Payment
+                                                            (%)</label>
+                                                        <input class="form-control" id="strpercentDownPayment"
+                                                            name="property-down-payment" required type="text"
+                                                            value="20">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label" for="closing-cost">Closing Cost
+                                                            ($)</label>
+                                                        <input class="form-control" id="strclosingCosts"
+                                                            name="property-closing-cost" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label"
+                                                            for="repairs-renovation">Repairs/Renovation ($)</label>
+                                                        <input class="form-control" id="strrepairsRenovationCost"
+                                                            name="property-repairs-renovation" required type="text">
+                                                    </div>
+                                                </div>
+                                                <label class="form-label" style="font-weight: bolder;">Loan
+                                                    Data</label>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label" for="percentInterestRate">Interest
+                                                            Rate (%)</label>
+                                                        <input class="form-control" id="strpercentInterestRate"
+                                                            name="interest-rate" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label" for="yearsFinanced">Years Financed
+                                                        </label>
+                                                        <input class="form-control" id="stryearsFinanced"
+                                                            name="years-financed" required type="text" value="30">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label" for="payment-per-year">Payments Per
+                                                            Year</label>
+                                                        <input class="form-control" id="strpaymentsPerYear"
+                                                            name="payment-per-year" required type="text" value="12">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col gap-3">
+                                                <label class="form-label" style="font-weight: bolder;">Expenses
+                                                    Data</label>
+                                                <div class="row">
+
+                                                    <div class="col">
+                                                        <label class="form-label">Property Tax ($)</label>
+                                                        <input class="form-control" id="strpropertyTaxesPerYear"
+                                                            name="taxes-per-year" placeholder="Yearly Taxes" required
+                                                            type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Insurance/Year ($)</label>
+                                                        <input class="form-control" id="strinsurancePerYear"
+                                                            name="property-insurance-per-year" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">HOA per year ($)
+                                                        </label>
+                                                        <input class="form-control" id="strhoaPerYear" name="hoa-yearly"
+                                                            required type="text">
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Maintenance Costs (%)</label>
+                                                        <input class="form-control" id="strpercentMaintenanceCost"
+                                                            name="maintenence-cost" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Property Management Fee (%)</label>
+                                                        <input class="form-control" id="strpercentPropertyManagementFee"
+                                                            name="property-management-fee" required type="text">
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Booking Fees (%)</label>
+                                                        <input class="form-control" id="strPercentBookingFees"
+                                                            name="booking-fees" required type="text" value="0">
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <label class="form-label">Lodging Tax (%)</label>
+                                                        <input class="form-control" id="strPercentLodgingTaxOther"
+                                                            name="lodging-tax" placeholder="Other Local Tax" required
+                                                            type="text" value="0">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Monthly Supplies ($)</label>
+                                                        <input class="form-control" id="strMonthlySupplies"
+                                                            name="monthly-supplies" required type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col">
+                                                        <label class="form-label">Monthly Utilities ($)</label>
+                                                        <input class="form-control" id="strmonthlyUtilities"
+                                                            name="monthly-utilities" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Monthly Costs ($)
+                                                        </label>
+                                                        <input class="form-control" id="strOtherMonthlyCosts"
+                                                            name="other-cost" placeholder="Subscriptions etc.." required
+                                                            type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Cable/Internet ($)
+                                                        </label>
+                                                        <input class="form-control" id="strMonthlyCableInternet"
+                                                            name="cable-internet" placeholder="Monthly Expenses"
+                                                            required type="text">
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label"
+                                                            style="font-weight: bolder; padding-top: 4px;">Rental Income
+                                                            Data</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label">Average Daily Rate ($)</label>
+                                                        <input class="form-control" id="strAverageDailyRate"
+                                                            name="average-daily-rate" required type="text">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">Occupancy Rate (%)</label>
+                                                        <input class="form-control" id="strPercentOccupancyRate"
+                                                            name="ocuupancy-rate" required type="text">
+                                                    </div>
+
+
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="form-label" for="upload-image">Upload
+                                                            Image</label>
+                                                        <input class="form-control" id="strproperty-upload-image"
+                                                            type="file">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row gap-3">
+                                            <div class="col gap-3">
+                                                <label class="form-label" for="property-note">Note</label>
+                                                <textarea class="form-control" id="strnote" rows="1"></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="row gap-3 justify-content-center">
+
+                                            <button class="btn " id="str-submit-button"
+                                                style="padding: 5px;font-size: larger;" type="submit">Create
+                                                STR
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- end of create property modal  -->
+
+    <!-- Button trigger modal -->
+    <button class="btn" data-bs-target="#exampleModal" data-bs-toggle="modal" id="btnShowPopup" style="display: none;"
+        type="button">
+        Launch demo modal
+    </button>
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-2">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">RestInv</h1>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body fs-5" id="modal-content-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- end modal -->
+
+
+    <!-- Bootstrap JS -->
+    <script crossorigin="anonymous" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="javascript/property.js" type="application/javascript"></script>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Market</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <!-- Load custom stylesheet -->
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link href="css/market.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="p-3 m-0 border-0 bd-example ">
+
+
+<!-- Navbar Section -->
+<nav class="navbar navbar-expand-lg sticky-top navbar-custom" style="background-color: white ;">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="#">
+            <img alt="Logo"
+                 class="d-inline-block align-text-top" height="24" src="https://img.icons8.com/external-others-iconmarket/64/null/external-home-search-others-iconmarket.png" width="30">
+            RestInv
+        </a>
+        <button aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-bs-target="#navbarTogglerDemo02" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav position-absolute top-0 end-0 mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a aria-current="page" class="nav-link logout" href="http://localhost:8080/api/v1/restinv/"
+                       onclick="handleLogout()">
+                        <img alt="Logo" height="24"
+                             onclick="handleLogout()" src="https://img.icons8.com/fluency/48/null/exit.png" width="30">
+                        LOGOUT</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- end of nav bar -->
+<!-- body -->
+<div class="container text-center">
+    <div class="vstack gap-3">
+        <div class="p-2 rounded-3">
+
+            <form class="row g-3 align-items-center market-form-container" id="market-form">
+                <div class="row ">
+                    <div class="col-md-6">
+
+                        <label class="form-label">State</label>
+                        <input class="form-control" id="market-state" list="statelist"
+                               onchange="resetIfInvalid(this);" placeholder="Type to search..." required>
+                        <datalist id="statelist">
+                            <option value="Alabama"></option>
+                            <option value="Alaska"></option>
+                            <option value="Arizona"></option>
+                            <option value="Arkansas"></option>
+                            <option value="California"></option>
+                            <option value="Colorado"></option>
+                            <option value="Connecticut"></option>
+                            <option value="Delaware"></option>
+                            <option value="District of Columbia"></option>
+                            <option value="Florida"></option>
+                            <option value="Georgia"></option>
+                            <option value="Hawaii"></option>
+                            <option value="Idaho"></option>
+                            <option value="Illinois"></option>
+                            <option value="Indiana"></option>
+                            <option value="Iowa"></option>
+                            <option value="Kansas"></option>
+                            <option value="Kentucky"></option>
+                            <option value="Louisiana"></option>
+                            <option value="Maine"></option>
+                            <option value="Maryland"></option>
+                            <option value="Massachusetts"></option>
+                            <option value="Michigan"></option>
+                            <option value="Minnesota"></option>
+                            <option value="Mississippi"></option>
+                            <option value="Missouri"></option>
+                            <option value="Montana"></option>
+                            <option value="Nebraska"></option>
+                            <option value="Nevada"></option>
+                            <option value="New Hampshire"></option>
+                            <option value="New Jersey"></option>
+                            <option value="New Mexico"></option>
+                            <option value="New York"></option>
+                            <option value="North Carolina"></option>
+                            <option value="North Dakota"></option>
+                            <option value="Ohio"></option>
+                            <option value="Oklahoma"></option>
+                            <option value="Oregon"></option>
+                            <option value="Pennsylvania"></option>
+                            <option value="Rhode Island"></option>
+                            <option value="South Carolina"></option>
+                            <option value="South Dakota"></option>
+                            <option value="Tennessee"></option>
+                            <option value="Texas"></option>
+                            <option value="Utah"></option>
+                            <option value="Vermont"></option>
+                            <option value="Virginia"></option>
+                            <option value="Washington"></option>
+                            <option value="West Virginia"></option>
+                            <option value="Wisconsin"></option>
+                            <option value="Wyoming"></option>
+                        </datalist>
+
+
+                        <label class="form-label" for="upload-image">Upload Image</label>
+                        <input class="form-control" id="upload-image" type="file">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="market-county">County</label>
+                        <input autocomplete="off" class="form-control" id="market-county"
+                               list="countylist" onchange="resetIfInvalid(this);"
+                               onmouseover="populateCounty();" placeholder="Type to search..." required>
+                        <datalist id="countylist">
+                        </datalist>
+                        <label class="form-label" for="market-note">Note</label>
+                        <textarea class="form-control" id="market-note" rows="1"></textarea>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn" style="padding: 6px 12px;" type="submit">Create Market</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="p-2 rounded-2">
+            <div class="row card-group row-cols-md-4 g-3" id="market-container">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- end of body -->
+<!-- Button trigger modal -->
+<button class="btn" data-bs-target="#exampleModal" data-bs-toggle="modal" id="btnShowPopup" style="display: none;"
+        type="button">
+    Launch demo modal
+</button>
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-2">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">RestInv</h1>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body fs-5" id="modal-content-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- end modal -->
+
+<!-- Bootstrap JS -->
+<script crossorigin="anonymous"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="javascript/market.js" type="application/javascript"></script>
+</body>
+
+</html>
