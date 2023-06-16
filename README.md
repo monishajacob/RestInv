@@ -2,6 +2,9 @@
 
 A real estate investment cash-on-cash calculator app where users can add property and calculate the cash-on-cash returns.
 
+## Demo 
+[Demo Video](https://youtu.be/I_QBZaX0iik)
+
 ## Tech Stack
 - Java
 - Spring Boot
