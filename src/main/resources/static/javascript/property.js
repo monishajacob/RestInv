@@ -573,7 +573,7 @@ async function createPropertyDetailsStr(obj, propertyId) {
                         </tr>
                         <tr>
                             <th scope="row">Down Payment (%)</th>
-                            <td id="viewDownPayment" >${obj.purchaseData["Down Payment ($)"]}</td>
+                            <td id="viewDownPayment" >${obj.purchaseData["Down Payment (%)"]}</td>
                         </tr>
                         <tr>
                             <th scope="row">Closing Costs ($)</th>

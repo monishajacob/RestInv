@@ -17,12 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 public class UserRegistrationService {
 
-    private final UserService userService;
-    private final EmailValidatorService emailValidatorService;
-    private final TokenConfirmationService tokenConfirmationService;
-    private final EmailSender emailSender;
-
-    private final EmailService emailService;
+    private  UserService userService;
+    private  EmailValidatorService emailValidatorService;
+    private  TokenConfirmationService tokenConfirmationService;
+    private  EmailSender emailSender;
+    private  EmailService emailService;
 
     public List<String> registerUser(UserRegistrationRequest request) {
         List<String> response = new ArrayList<>();
